@@ -28,31 +28,31 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-/**
+ /**
  * @file
- * @brief Lyssa application
+ * @brief Lanthe application version
  * @author Saveliy Pototskiy (SavaLione)
- * @date 16 Sep 2022
+ * @date 10 Sep 2022
  */
-#include "core/lyssa.h"
+#ifndef CORE_VERSION_H
+#define CORE_VERSION_H
 
-#include "core/settings.h"
-#include "gui/gui.h"
-#include "io/logger.h"
+#include <string>
 
-#include <iostream>
+/* Verion major */
+std::string get_version_major();
 
+/* Verion minor */
+std::string get_version_minor();
 
-int main()
-{
-	/* Settings initialization */
-	settings &settings_instance = settings::instance();
+/* Verion path */
+std::string get_version_path();
 
-	/* Logger initialization */
-	logger_init();
+/*
+    Verion full
+    
+    Example: 0.0.23
+*/
+std::string get_version_full();
 
-    /* gui */
-    gui g;
-
-	return 0;
-}
+#endif // CORE_VERSION_H

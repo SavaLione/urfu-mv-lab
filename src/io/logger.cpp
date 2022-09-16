@@ -1,7 +1,7 @@
 /*
  * SPDX-License-Identifier: BSD-3-Clause
  * 
- * Copyright (c) 2022, Saveliy Pototskiy (SavaLione) (savalione.com)
+ * Copyright (c) 2021-2022, Saveliy Pototskiy (SavaLione) (savalione.com)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,31 +28,44 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-/**
+ /**
  * @file
- * @brief Lyssa application
+ * @brief Logger wrapper
  * @author Saveliy Pototskiy (SavaLione)
- * @date 16 Sep 2022
+ * @date 23 Jun 2021
  */
-#include "core/lyssa.h"
-
-#include "core/settings.h"
-#include "gui/gui.h"
 #include "io/logger.h"
 
-#include <iostream>
+#include "core/settings.h"
 
-
-int main()
+void logger_init()
 {
-	/* Settings initialization */
 	settings &settings_instance = settings::instance();
 
-	/* Logger initialization */
-	logger_init();
+	switch(settings_instance.l_level())
+	{
+		case log_level::TRACE:
+			spdlog::set_level(spdlog::level::trace);
+			break;
+		case log_level::DEBUG:
+			spdlog::set_level(spdlog::level::debug);
+			break;
+		case log_level::INFO:
+			spdlog::set_level(spdlog::level::info);
+			break;
+		case log_level::WARN:
+			spdlog::set_level(spdlog::level::warn);
+			break;
+		case log_level::ERROR:
+			spdlog::set_level(spdlog::level::err);
+			break;
+		case log_level::CRITICAL:
+			spdlog::set_level(spdlog::level::critical);
+			break;
+		default:
+			spdlog::set_level(spdlog::level::info);
+			break;
+	}
 
-    /* gui */
-    gui g;
-
-	return 0;
+	// spdlog::set_pattern("[%H:%M:%S %z] [%^%L%$] [thread %t] %v");
 }

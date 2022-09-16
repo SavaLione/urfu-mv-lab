@@ -30,29 +30,55 @@
  */
 /**
  * @file
- * @brief Lyssa application
+ * @brief Variable definition
  * @author Saveliy Pototskiy (SavaLione)
  * @date 16 Sep 2022
  */
-#include "core/lyssa.h"
+#ifndef CORE_VARIABLE_H
+#define CORE_VARIABLE_H
 
-#include "core/settings.h"
-#include "gui/gui.h"
-#include "io/logger.h"
-
-#include <iostream>
-
-
-int main()
+template<typename T>
+class variable
 {
-	/* Settings initialization */
-	settings &settings_instance = settings::instance();
+public:
+	variable() {}
+	variable(T var) : _var(var), _is_set(true) {}
 
-	/* Logger initialization */
-	logger_init();
+	~variable() {}
 
-    /* gui */
-    gui g;
+	bool const &is_set() const
+	{
+		return _is_set;
+	}
 
-	return 0;
-}
+	bool const &is_changeable() const
+	{
+		return _is_set;
+	}
+
+	void set(T var)
+	{
+		_is_set = true;
+		if(_is_changeable)
+		{
+			_var = var;
+		}
+	}
+
+	void unset()
+	{
+		_is_set = false;
+	}
+
+	T get()
+	{
+		return _var;
+	}
+
+private:
+	T _var;
+	bool _is_set		= false;
+	bool _is_changeable = true;
+};
+
+#endif // CORE_VARIABLE_H

@@ -1,7 +1,7 @@
 /*
  * SPDX-License-Identifier: BSD-3-Clause
  * 
- * Copyright (c) 2022, Saveliy Pototskiy (SavaLione) (savalione.com)
+ * Copyright (c) 2020-2022, Saveliy Pototskiy (SavaLione) (savalione.com)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -30,29 +30,27 @@
  */
 /**
  * @file
- * @brief Lyssa application
+ * @brief Algorithm execution time
  * @author Saveliy Pototskiy (SavaLione)
- * @date 16 Sep 2022
+ * @date 10 Nov 2020
  */
-#include "core/lyssa.h"
+#ifndef TIME_EXECUTION_TIME_H
+#define TIME_EXECUTION_TIME_H
 
-#include "core/settings.h"
-#include "gui/gui.h"
-#include "io/logger.h"
+#include <ctime>
+#include <string>
 
-#include <iostream>
-
-
-int main()
+class execution_time
 {
-	/* Settings initialization */
-	settings &settings_instance = settings::instance();
+public:
+	execution_time();
+	~execution_time();
+	void start();
+	double duration();
+	std::string s_duration();
 
-	/* Logger initialization */
-	logger_init();
+private:
+	std::clock_t _start;
+};
 
-    /* gui */
-    gui g;
-
-	return 0;
-}
+#endif // TIME_EXECUTION_TIME_H

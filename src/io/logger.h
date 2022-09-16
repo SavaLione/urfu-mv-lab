@@ -1,7 +1,7 @@
 /*
  * SPDX-License-Identifier: BSD-3-Clause
  * 
- * Copyright (c) 2022, Saveliy Pototskiy (SavaLione) (savalione.com)
+ * Copyright (c) 2021-2022, Saveliy Pototskiy (SavaLione) (savalione.com)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,31 +28,17 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-/**
+ /**
  * @file
- * @brief Lyssa application
+ * @brief Logger wrapper
  * @author Saveliy Pototskiy (SavaLione)
- * @date 16 Sep 2022
+ * @date 23 Jun 2021
  */
-#include "core/lyssa.h"
+#ifndef IO_LOGGER_H
+#define IO_LOGGER_H
 
-#include "core/settings.h"
-#include "gui/gui.h"
-#include "io/logger.h"
+#include <spdlog/spdlog.h>
 
-#include <iostream>
+void logger_init();
 
-
-int main()
-{
-	/* Settings initialization */
-	settings &settings_instance = settings::instance();
-
-	/* Logger initialization */
-	logger_init();
-
-    /* gui */
-    gui g;
-
-	return 0;
-}
+#endif // IO_LOGGER_H

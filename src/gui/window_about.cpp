@@ -30,29 +30,56 @@
  */
 /**
  * @file
- * @brief Lyssa application
+ * @brief Window about
  * @author Saveliy Pototskiy (SavaLione)
  * @date 16 Sep 2022
  */
-#include "core/lyssa.h"
+#include "gui/window_about.h"
 
-#include "core/settings.h"
-#include "gui/gui.h"
+#include "core/compiler_version.h"
+#include "core/version.h"
 #include "io/logger.h"
 
-#include <iostream>
+#include <imgui.h>
 
-
-int main()
+window_about::window_about()
 {
-	/* Settings initialization */
-	settings &settings_instance = settings::instance();
+	_set_name("About");
+}
 
-	/* Logger initialization */
-	logger_init();
+window_about::~window_about() {}
 
-    /* gui */
-    gui g;
+void window_about::run()
+{
+	if(_show_window)
+	{
+		ImGuiWindowFlags window_flags = 0;
+		window_flags |= ImGuiWindowFlags_NoResize;
+		window_flags |= ImGuiWindowFlags_NoCollapse;
 
-	return 0;
+		ImGui::Begin(get_name().c_str(), &_show_window, window_flags);
+
+		ImGui::Text("Author: Savely Pototsky (SavaLione)");
+		ImGui::Text("Group:  FOM-210510");
+		ImGui::Separator();
+		ImGui::Text("Application version: ");
+		ImGui::SameLine();
+		ImGui::Text(get_version_full().c_str());
+		ImGui::Text("c++ version: ");
+		ImGui::SameLine();
+		std::string _cpp_version = std::to_string(__cplusplus);
+		ImGui::Text(_cpp_version.c_str());
+		ImGui::Text("Compiler: ");
+		ImGui::SameLine();
+		ImGui::Text(compiler_version().c_str());
+		ImGui::Text("Compile date: ");
+		ImGui::SameLine();
+		std::string _date = __DATE__;
+		_date += " ";
+		_date += __TIME__;
+		ImGui::Text(_date.c_str());
+		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+
+		ImGui::End();
+	}
 }

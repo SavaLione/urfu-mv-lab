@@ -30,29 +30,54 @@
  */
 /**
  * @file
- * @brief Lyssa application
+ * @brief Graphical user interface window template
  * @author Saveliy Pototskiy (SavaLione)
  * @date 16 Sep 2022
  */
-#include "core/lyssa.h"
+#include "gui/window.h"
 
-#include "core/settings.h"
-#include "gui/gui.h"
 #include "io/logger.h"
 
-#include <iostream>
+#include <imgui.h>
 
-
-int main()
+void window::_set_name(std::string const &name)
 {
-	/* Settings initialization */
-	settings &settings_instance = settings::instance();
+	_name = name;
+}
 
-	/* Logger initialization */
-	logger_init();
+void window::_set_description(std::string const &description)
+{
+	_description = description;
+}
 
-    /* gui */
-    gui g;
+std::string window::get_name()
+{
+	return _name;
+}
 
-	return 0;
+std::string window::get_description()
+{
+	return _description;
+}
+
+void window::show_window()
+{
+	spdlog::info("Show window {}", _name);
+	_show_window = true;
+}
+
+void window::hide_window()
+{
+	spdlog::info("Hide window {}", _name);
+	_show_window = false;
+}
+
+void window::run()
+{
+	if(_show_window)
+	{
+		ImGui::Begin(_name.c_str(), &_show_window);
+
+		ImGui::End();
+	}
 }

@@ -1,7 +1,7 @@
 /*
  * SPDX-License-Identifier: BSD-3-Clause
  * 
- * Copyright (c) 2022, Saveliy Pototskiy (SavaLione) (savalione.com)
+ * Copyright (c) 2021-2022, Saveliy Pototskiy (SavaLione) (savalione.com)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,31 +28,17 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-/**
+ /**
  * @file
- * @brief Lyssa application
+ * @brief Compiler version
  * @author Saveliy Pototskiy (SavaLione)
- * @date 16 Sep 2022
+ * @date 12 Jan 2021
  */
-#include "core/lyssa.h"
+#ifndef COMPILER_VERSION_H
+#define COMPILER_VERSION_H
 
-#include "core/settings.h"
-#include "gui/gui.h"
-#include "io/logger.h"
+#include <string>
 
-#include <iostream>
+std::string compiler_version();
 
-
-int main()
-{
-	/* Settings initialization */
-	settings &settings_instance = settings::instance();
-
-	/* Logger initialization */
-	logger_init();
-
-    /* gui */
-    gui g;
-
-	return 0;
-}
+#endif // COMPILER_VERSION_H

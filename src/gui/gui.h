@@ -30,29 +30,83 @@
  */
 /**
  * @file
- * @brief Lyssa application
+ * @brief Graphical user interface
  * @author Saveliy Pototskiy (SavaLione)
  * @date 16 Sep 2022
  */
-#include "core/lyssa.h"
+#ifndef GUI_GUI_H
+#define GUI_GUI_H
 
-#include "core/settings.h"
-#include "gui/gui.h"
-#include "io/logger.h"
+#include "gui/window.h"
+#include "gui/window_about.h"
+#include "gui/window_imgui_features.h"
+#include "gui/window_settings.h"
 
-#include <iostream>
+#include <memory>
+#include <vector>
 
+// clang-format off
+#include <imgui.h>
+#include <backends/imgui_impl_glfw.h>
+#include <backends/imgui_impl_opengl3.h>
 
-int main()
+#include <GLFW/glfw3.h>
+// clang-format on
+
+class gui
 {
-	/* Settings initialization */
-	settings &settings_instance = settings::instance();
+public:
+	gui();
+	~gui();
 
-	/* Logger initialization */
-	logger_init();
+	gui(const gui &) = delete;
+	gui &operator=(const gui &) = delete;
 
-    /* gui */
-    gui g;
+private:
+	/* Setup window */
+	bool _setup_window();
 
-	return 0;
-}
+	bool _is_window_create = false;
+
+	/* Set GLSL version */
+	const char *glsl_version = "#version 130";
+	void _set_glsl_version();
+
+	/* Window */
+	GLFWwindow *_window = nullptr;
+
+	/* Create window */
+	bool _create_window();
+
+	/* imgui initialization */
+	void _imgui_init();
+
+	/* Run window */
+	void _run();
+
+	/* Rednering */
+	void _render();
+
+	/*
+        States
+    */
+
+	/* Show main window */
+	bool show_gui_window = true;
+
+	/* Gui main window background color */
+	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+
+	/* Image path */
+	std::string _path_to_the_image = "NOTSET";
+
+	/*
+        Windows
+    */
+	std::vector<std::unique_ptr<window>> _windows;
+
+	/* Test window with imgui features */
+	void _window_test();
+};
+
+#endif // GUI_GUI_H

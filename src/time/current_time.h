@@ -1,7 +1,7 @@
 /*
  * SPDX-License-Identifier: BSD-3-Clause
  * 
- * Copyright (c) 2022, Saveliy Pototskiy (SavaLione) (savalione.com)
+ * Copyright (c) 2020-2022, Saveliy Pototskiy (SavaLione) (savalione.com)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -30,29 +30,41 @@
  */
 /**
  * @file
- * @brief Lyssa application
+ * @brief Working with time
  * @author Saveliy Pototskiy (SavaLione)
- * @date 16 Sep 2022
+ * @date 10 Nov 2020
  */
-#include "core/lyssa.h"
+#ifndef TIME_CURRENT_TIME_H
+#define TIME_CURRENT_TIME_H
 
-#include "core/settings.h"
-#include "gui/gui.h"
-#include "io/logger.h"
+#include <ctime>
+#include <string>
 
-#include <iostream>
-
-
-int main()
+class current_time
 {
-	/* Settings initialization */
-	settings &settings_instance = settings::instance();
+public:
+	current_time();
+	~current_time();
 
-	/* Logger initialization */
-	logger_init();
+	std::string s_year();
+	std::string s_month();
+	std::string s_day();
+	std::string s_hour();
+	std::string s_min();
+	std::string s_sec();
 
-    /* gui */
-    gui g;
+	int i_year();
+	int i_month();
+	int i_day();
+	int i_hour();
+	int i_min();
+	int i_sec();
 
-	return 0;
-}
+	std::string s_date();
+
+private:
+	time_t now = time(0);
+	tm *ltm	   = localtime(&now);
+};
+
+#endif // TIME_CURRENT_TIME_H

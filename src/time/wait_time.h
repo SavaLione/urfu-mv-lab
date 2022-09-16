@@ -1,7 +1,7 @@
 /*
  * SPDX-License-Identifier: BSD-3-Clause
  * 
- * Copyright (c) 2022, Saveliy Pototskiy (SavaLione) (savalione.com)
+ * Copyright (c) 2020-2022, Saveliy Pototskiy (SavaLione) (savalione.com)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -30,29 +30,25 @@
  */
 /**
  * @file
- * @brief Lyssa application
+ * @brief Wait
  * @author Saveliy Pototskiy (SavaLione)
- * @date 16 Sep 2022
+ * @date 10 Nov 2020
  */
-#include "core/lyssa.h"
 
-#include "core/settings.h"
-#include "gui/gui.h"
-#include "io/logger.h"
-
-#include <iostream>
-
-
-int main()
+class wait_time
 {
-	/* Settings initialization */
-	settings &settings_instance = settings::instance();
+public:
+	wait_time();
+	~wait_time();
 
-	/* Logger initialization */
-	logger_init();
+	void msec(const int &msec);
+	void sec(const int &sec);
+	void minutes(const int &minutes);
+	void hour(const int &hour);
 
-    /* gui */
-    gui g;
-
-	return 0;
-}
+private:
+	void _msec(const int &msec);
+	void _sec(const int &sec);
+	void _minutes(const int &minutes);
+	void _hour(const int &hour);
+};

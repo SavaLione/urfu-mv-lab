@@ -28,31 +28,64 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-/**
+ /**
  * @file
- * @brief Lyssa application
+ * @brief Lanthe application version
  * @author Saveliy Pototskiy (SavaLione)
- * @date 16 Sep 2022
+ * @date 10 Sep 2022
  */
-#include "core/lyssa.h"
+#include "core/version.h"
 
-#include "core/settings.h"
-#include "gui/gui.h"
-#include "io/logger.h"
+#include <cstddef>
+#include <vector>
 
-#include <iostream>
+std::string _VERSION = "0.0.1";
 
-
-int main()
+std::vector<std::string> split(std::string s, std::string delimiter)
 {
-	/* Settings initialization */
-	settings &settings_instance = settings::instance();
+	size_t pos_start = 0, pos_end, delim_len = delimiter.length();
+	std::string token;
+	std::vector<std::string> res;
 
-	/* Logger initialization */
-	logger_init();
+	while((pos_end = s.find(delimiter, pos_start)) != std::string::npos)
+	{
+		token	  = s.substr(pos_start, pos_end - pos_start);
+		pos_start = pos_end + delim_len;
+		res.push_back(token);
+	}
 
-    /* gui */
-    gui g;
+	res.push_back(s.substr(pos_start));
+	return res;
+}
 
-	return 0;
+std::string get_version_number(int const &i)
+{
+	std::string ret					= "";
+	std::vector<std::string> _ret_v = split(_VERSION, ".");
+
+	if(_ret_v.size() > i)
+	{
+		ret = _ret_v[i];
+	}
+	return ret;
+}
+
+std::string get_version_major()
+{
+	return get_version_number(0);
+}
+
+std::string get_version_minor()
+{
+	return get_version_number(1);
+}
+
+std::string get_version_path()
+{
+	return get_version_number(2);
+}
+
+std::string get_version_full()
+{
+	return _VERSION;
 }

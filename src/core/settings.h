@@ -30,29 +30,60 @@
  */
 /**
  * @file
- * @brief Lyssa application
+ * @brief Lanthe application settings
  * @author Saveliy Pototskiy (SavaLione)
- * @date 16 Sep 2022
+ * @date 10 Sep 2022
  */
-#include "core/lyssa.h"
+#ifndef CORE_SETTINGS_H
+#define CORE_SETTINGS_H
 
-#include "core/settings.h"
-#include "gui/gui.h"
-#include "io/logger.h"
+#include "core/variable.h"
 
-#include <iostream>
+#include <string>
 
 
-int main()
+/* Log levels */
+enum log_level
 {
-	/* Settings initialization */
-	settings &settings_instance = settings::instance();
+	TRACE	 = 1,
+	DEBUG	 = 2,
+	INFO	 = 3,
+	WARN	 = 4,
+	ERROR	 = 5,
+	CRITICAL = 6
+};
 
-	/* Logger initialization */
-	logger_init();
+class settings
+{
+public:
+	static settings &instance()
+	{
+		static settings s;
+		return s;
+	}
 
-    /* gui */
-    gui g;
+	~settings();
 
-	return 0;
-}
+	/*
+        Variables and parameters
+    */
+
+	/* Log level */
+	log_level l_level();
+
+	variable<std::string> image_path;
+
+private:
+	settings();
+	settings(settings const &) = delete;
+	settings &operator=(settings const &) = delete;
+
+	/*
+        Variables and parameters
+    */
+
+	/* Log level */
+	log_level _l_level = log_level::INFO;
+};
+
+#endif // CORE_SETTINGS_H

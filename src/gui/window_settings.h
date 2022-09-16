@@ -30,29 +30,26 @@
  */
 /**
  * @file
- * @brief Lyssa application
+ * @brief Window settings
  * @author Saveliy Pototskiy (SavaLione)
  * @date 16 Sep 2022
  */
-#include "core/lyssa.h"
+#ifndef GUI_WINDOW_SETTINGS_H
+#define GUI_WINDOW_SETTINGS_H
 
 #include "core/settings.h"
-#include "gui/gui.h"
-#include "io/logger.h"
+#include "gui/window.h"
 
-#include <iostream>
-
-
-int main()
+class window_settings : public window
 {
-	/* Settings initialization */
+public:
+	window_settings();
+	~window_settings();
+
+	void run();
+
+private:
 	settings &settings_instance = settings::instance();
+};
 
-	/* Logger initialization */
-	logger_init();
-
-    /* gui */
-    gui g;
-
-	return 0;
-}
+#endif // GUI_WINDOW_SETTINGS_H

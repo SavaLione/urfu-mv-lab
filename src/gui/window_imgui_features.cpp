@@ -30,29 +30,26 @@
  */
 /**
  * @file
- * @brief Lyssa application
+ * @brief Window imgui features
  * @author Saveliy Pototskiy (SavaLione)
  * @date 16 Sep 2022
  */
-#include "core/lyssa.h"
+#include "gui/window_imgui_features.h"
 
-#include "core/settings.h"
-#include "gui/gui.h"
-#include "io/logger.h"
+#include <imgui.h>
 
-#include <iostream>
-
-
-int main()
+window_imgui_features::window_imgui_features()
 {
-	/* Settings initialization */
-	settings &settings_instance = settings::instance();
+	_set_name("Imgui features");
+	_show_window = false;
+}
 
-	/* Logger initialization */
-	logger_init();
+window_imgui_features::~window_imgui_features() {}
 
-    /* gui */
-    gui g;
-
-	return 0;
+void window_imgui_features::run()
+{
+	if(_show_window)
+	{
+		ImGui::ShowDemoWindow(&_show_window);
+	}
 }

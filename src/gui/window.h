@@ -30,29 +30,40 @@
  */
 /**
  * @file
- * @brief Lyssa application
+ * @brief Graphical user interface window template
  * @author Saveliy Pototskiy (SavaLione)
  * @date 16 Sep 2022
  */
-#include "core/lyssa.h"
+#ifndef GUI_WINDOW_H
+#define GUI_WINDOW_H
 
-#include "core/settings.h"
-#include "gui/gui.h"
-#include "io/logger.h"
+#include <string>
 
-#include <iostream>
-
-
-int main()
+class window
 {
-	/* Settings initialization */
-	settings &settings_instance = settings::instance();
+public:
+	window() {};
+	window(std::string const &name) : _name(name) {};
+	window(std::string const &name, std::string const &description) : _name(name), _description(description) {};
+	~window() = default;
 
-	/* Logger initialization */
-	logger_init();
+	virtual std::string get_name();
+	virtual std::string get_description();
 
-    /* gui */
-    gui g;
+	virtual void show_window();
+	virtual void hide_window();
 
-	return 0;
-}
+	virtual void run();
+
+protected:
+	void _set_name(std::string const &name);
+	void _set_description(std::string const &description);
+
+	bool _show_window = true;
+
+private:
+	std::string _name		 = "window_name_not_set";
+	std::string _description = "description not set";
+};
+
+#endif // GUI_WINDOW_H

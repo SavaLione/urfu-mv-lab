@@ -28,31 +28,18 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-/**
+ /**
  * @file
- * @brief Lyssa application
+ * @brief Lanthe application settings
  * @author Saveliy Pototskiy (SavaLione)
- * @date 16 Sep 2022
+ * @date 10 Sep 2022
  */
-#include "core/lyssa.h"
-
 #include "core/settings.h"
-#include "gui/gui.h"
-#include "io/logger.h"
 
-#include <iostream>
+settings::settings() {}
+settings::~settings() {}
 
-
-int main()
+log_level settings::l_level()
 {
-	/* Settings initialization */
-	settings &settings_instance = settings::instance();
-
-	/* Logger initialization */
-	logger_init();
-
-    /* gui */
-    gui g;
-
-	return 0;
+	return _l_level;
 }

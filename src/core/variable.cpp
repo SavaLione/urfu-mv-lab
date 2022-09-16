@@ -28,31 +28,10 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-/**
+ /**
  * @file
- * @brief Lyssa application
+ * @brief Variable definition
  * @author Saveliy Pototskiy (SavaLione)
  * @date 16 Sep 2022
  */
-#include "core/lyssa.h"
-
-#include "core/settings.h"
-#include "gui/gui.h"
-#include "io/logger.h"
-
-#include <iostream>
-
-
-int main()
-{
-	/* Settings initialization */
-	settings &settings_instance = settings::instance();
-
-	/* Logger initialization */
-	logger_init();
-
-    /* gui */
-    gui g;
-
-	return 0;
-}
+#include "core/variable.h"

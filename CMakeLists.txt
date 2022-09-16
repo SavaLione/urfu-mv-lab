@@ -69,13 +69,56 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/lib/tinyfiledialogs)
 #################################################################################
 # core
 set(LYSSA_CORE_SRC
+    src/core/compiler_version.h
+    src/core/compiler_version.cpp
     src/core/lyssa.h
     src/core/lyssa.cpp
+    src/core/platform.h
+    src/core/platform.cpp
+    src/core/settings.h
+    src/core/settings.cpp
+    src/core/variable.h
+    src/core/variable.cpp
+    src/core/version.h
+    src/core/version.cpp
+)
+
+# io
+set(LYSSA_IO_SRC
+    src/io/logger.h
+    src/io/logger.cpp
+)
+
+# time
+set(LYSSA_TIME_SRC
+    src/time/current_time.h
+    src/time/current_time.cpp
+    src/time/execution_time.h
+    src/time/execution_time.cpp
+    src/time/wait_time.h
+    src/time/wait_time.cpp
+)
+
+# gui
+set(LYSSA_GUI_SRC
+    src/gui/gui.h
+    src/gui/gui.cpp
+    src/gui/window_about.h
+    src/gui/window_about.cpp
+    src/gui/window_imgui_features.h
+    src/gui/window_imgui_features.cpp
+    src/gui/window_settings.h
+    src/gui/window_settings.cpp
+    src/gui/window.h
+    src/gui/window.cpp
 )
 
 # Lyssa application
 set(LYSSA_SRC
     ${LYSSA_CORE_SRC}
+    ${LYSSA_IO_SRC}
+    ${LYSSA_TIME_SRC}
+    ${LYSSA_GUI_SRC}
 )
 
 #################################################################################

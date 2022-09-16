@@ -1,7 +1,7 @@
 /*
  * SPDX-License-Identifier: BSD-3-Clause
  * 
- * Copyright (c) 2022, Saveliy Pototskiy (SavaLione) (savalione.com)
+ * Copyright (c) 2020-2022, Saveliy Pototskiy (SavaLione) (savalione.com)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -30,29 +30,62 @@
  */
 /**
  * @file
- * @brief Lyssa application
+ * @brief Wait
  * @author Saveliy Pototskiy (SavaLione)
- * @date 16 Sep 2022
+ * @date 10 Nov 2020
  */
-#include "core/lyssa.h"
+#include "time/wait_time.h"
 
-#include "core/settings.h"
-#include "gui/gui.h"
-#include "io/logger.h"
+#include "core/platform.h"
 
-#include <iostream>
+#if PLATFORM == PLATFORM_WIN32
+	#include <windows.h>
+	#define TIME_SLEEP(x) Sleep(x)
+#else
+	#include <unistd.h>
+	#define TIME_SLEEP(x) sleep(x)
+#endif
 
+wait_time::wait_time() {}
 
-int main()
+wait_time::~wait_time() {}
+
+void wait_time::msec(const int &msec)
 {
-	/* Settings initialization */
-	settings &settings_instance = settings::instance();
+	_msec(msec);
+}
 
-	/* Logger initialization */
-	logger_init();
+void wait_time::sec(const int &sec)
+{
+	_sec(sec);
+}
 
-    /* gui */
-    gui g;
+void wait_time::minutes(const int &minutes)
+{
+	_minutes(minutes);
+}
 
-	return 0;
+void wait_time::hour(const int &hour)
+{
+	_hour(hour);
+}
+
+void wait_time::_msec(const int &msec)
+{
+	TIME_SLEEP(msec);
+}
+
+void wait_time::_sec(const int &sec)
+{
+	TIME_SLEEP(1000 * sec);
+}
+
+void wait_time::_minutes(const int &minutes)
+{
+	TIME_SLEEP(1000 * 1 * 60 * minutes);
+}
+
+void wait_time::_hour(const int &hour)
+{
+	TIME_SLEEP(1000 * 1 * 60 * 60 * hour);
 }
