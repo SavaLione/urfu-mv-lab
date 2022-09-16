@@ -55,8 +55,11 @@ void window_settings::run()
 	{
 		ImGui::Begin(get_name().c_str(), &_show_window);
 
-		std::string img_path = "Image path: ";
-		// img_path += settings_instance.get_image_path();
+		///////////////////////////////////////////////////////////////////////////////////////////////////
+
+		ImGui::Text("Select image");
+
+		std::string img_path = "Image file path: ";
 		if(settings_instance.image_path.is_set())
 		{
 			img_path += settings_instance.image_path.get();
@@ -80,7 +83,7 @@ void window_settings::run()
 
 		ImGui::Separator();
 
-		if(ImGui::Button("Select image"))
+		if(ImGui::Button("Select image file"))
 		{
 			char const *the_open_file_name;
 			char const *filter_patterns[3] = {"*.png", "*.jpg", "*.jpeg"};
@@ -90,26 +93,79 @@ void window_settings::run()
 			if(!the_open_file_name)
 			{
 				spdlog::error("Image opening problem. Open file name is NULL.");
-				// settings_instance.set_image_path("image_path_not_set");
-				// settings_instance.set_image_path_set(false);
-
-				// settings_instance.image_path.set("image_path_not_set");
 				settings_instance.image_path.unset();
 			}
 			else
 			{
-				// settings_instance.set_image_path(the_open_file_name);
-				// settings_instance.set_image_path_set(true);
 				settings_instance.image_path.set(the_open_file_name);
 			}
 		}
 		ImGui::SameLine();
 		if(ImGui::Button("Clear image path"))
 		{
-			// settings_instance.set_image_path("image_path_not_set");
-			// settings_instance.set_image_path_set(false);
 			settings_instance.image_path.unset();
 		}
+
+		ImGui::Separator();
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////
+
+		ImGui::Text("Select webcam.");
+
+		ImGui::Separator();
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////
+
+		ImGui::Text("Select video file.");
+
+		std::string video_path = "Video file path: ";
+		if(settings_instance.video_path.is_set())
+		{
+			video_path += settings_instance.video_path.get();
+		}
+		else
+		{
+			video_path += "Video path is not set";
+		}
+		ImGui::Text(video_path.c_str());
+
+		std::string video_path_status = "Video path status: ";
+		if(settings_instance.video_path.is_set())
+		{
+			video_path_status += "true";
+		}
+		else
+		{
+			video_path_status += "false";
+		}
+		ImGui::Text(video_path_status.c_str());
+
+		ImGui::Separator();
+
+		if(ImGui::Button("Select video file"))
+		{
+			char const *the_open_file_name;
+			char const *filter_patterns[3] = {"*.mp4", "*.m4v", "*.mp4v"};
+
+			the_open_file_name = tinyfd_openFileDialog("Select a video file", "", 2, filter_patterns, NULL, 0);
+
+			if(!the_open_file_name)
+			{
+				spdlog::error("Video file opening problem. Open file name is NULL.");
+				settings_instance.video_path.unset();
+			}
+			else
+			{
+				settings_instance.video_path.set(the_open_file_name);
+			}
+		}
+		ImGui::SameLine();
+		if(ImGui::Button("Clear video path"))
+		{
+			settings_instance.video_path.unset();
+		}
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////
 
 		ImGui::End();
 	}

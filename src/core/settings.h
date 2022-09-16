@@ -41,7 +41,6 @@
 
 #include <string>
 
-
 /* Log levels */
 enum log_level
 {
@@ -71,7 +70,11 @@ public:
 	/* Log level */
 	log_level l_level();
 
+	/* Image path */
 	variable<std::string> image_path;
+
+	/* Video path */
+	variable<std::string> video_path;
 
 private:
 	settings();
