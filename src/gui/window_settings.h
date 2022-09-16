@@ -50,6 +50,9 @@ public:
 
 private:
 	settings &settings_instance = settings::instance();
+	void _select_image_file();
+	void _select_capture_device();
+	void _select_video_file();
 };
 
 #endif // GUI_WINDOW_SETTINGS_H
