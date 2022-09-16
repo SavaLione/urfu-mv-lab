@@ -1,0 +1,12 @@
+[submodule "lib/glfw"]
+	path = lib/glfw
+	url = https://github.com/glfw/glfw.git
+[submodule "lib/spdlog"]
+	path = lib/spdlog
+	url = https://github.com/gabime/spdlog.git
+[submodule "lib/imgui"]
+	path = lib/imgui
+	url = https://github.com/SavaLione/imgui-cmake.git
+[submodule "lib/tinyfiledialogs"]
+	path = lib/tinyfiledialogs
+	url = https://github.com/SavaLione/tinyfiledialogs-cmake.git
