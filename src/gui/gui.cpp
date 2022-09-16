@@ -61,6 +61,7 @@ gui::gui()
 	_windows.push_back(std::make_unique<window_imgui_features>());
 	_windows.push_back(std::make_unique<window_about>());
 	_windows.push_back(std::make_unique<window_settings>());
+	_windows.push_back(std::make_unique<window_cv>());
 
 	if(_setup_window())
 	{

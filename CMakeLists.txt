@@ -105,6 +105,8 @@ set(LYSSA_GUI_SRC
     src/gui/gui.cpp
     src/gui/window_about.h
     src/gui/window_about.cpp
+    src/gui/window_cv.h
+    src/gui/window_cv.cpp
     src/gui/window_imgui_features.h
     src/gui/window_imgui_features.cpp
     src/gui/window_settings.h
